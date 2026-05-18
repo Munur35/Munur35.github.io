@@ -19,32 +19,98 @@
       margin: 0;
       min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(90, 90, 90, 0.26), transparent 35%),
-        linear-gradient(180deg, #090909 0%, #000000 100%);
+      background: #000;
       color: #f5f5f5;
       display: flex;
       justify-content: center;
       padding: 28px 16px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(130, 130, 130, 0.24), transparent 34%),
+        radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.08), transparent 22%),
+        radial-gradient(circle at 85% 35%, rgba(255, 255, 255, 0.07), transparent 24%),
+        linear-gradient(180deg, #090909 0%, #000000 100%);
+      z-index: -3;
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .particle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.45);
+      animation: floatUp linear infinite;
+    }
+
+    .particle:nth-child(1) { left: 8%; animation-duration: 12s; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 16%; animation-duration: 15s; animation-delay: 2s; }
+    .particle:nth-child(3) { left: 25%; animation-duration: 11s; animation-delay: 5s; }
+    .particle:nth-child(4) { left: 34%; animation-duration: 17s; animation-delay: 1s; }
+    .particle:nth-child(5) { left: 43%; animation-duration: 14s; animation-delay: 4s; }
+    .particle:nth-child(6) { left: 51%; animation-duration: 18s; animation-delay: 3s; }
+    .particle:nth-child(7) { left: 60%; animation-duration: 13s; animation-delay: 6s; }
+    .particle:nth-child(8) { left: 69%; animation-duration: 16s; animation-delay: 2s; }
+    .particle:nth-child(9) { left: 78%; animation-duration: 12s; animation-delay: 7s; }
+    .particle:nth-child(10) { left: 88%; animation-duration: 19s; animation-delay: 0s; }
+    .particle:nth-child(11) { left: 93%; animation-duration: 14s; animation-delay: 5s; }
+    .particle:nth-child(12) { left: 4%; animation-duration: 20s; animation-delay: 8s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 0.8;
+      }
+
+      80% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translateY(-12vh) rotate(180deg) scale(1.2);
+        opacity: 0;
+      }
     }
 
     .page {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .logo {
       margin: 12px 0 6px;
-      font-size: 56px;
+      font-size: 58px;
       font-weight: 900;
       letter-spacing: 3px;
       color: #ffffff;
-      text-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+      text-shadow:
+        0 0 16px rgba(255, 255, 255, 0.28),
+        0 0 40px rgba(255, 255, 255, 0.12);
     }
 
     .tagline {
-      margin: 0 0 22px;
+      margin: 0 0 24px;
       color: #bdbdbd;
       font-size: 15px;
     }
@@ -52,11 +118,14 @@
     .panel {
       width: 100%;
       border: 2px solid #f5f5f5;
-      border-radius: 22px;
-      background: rgba(10, 10, 10, 0.88);
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      background: rgba(10, 10, 10, 0.86);
+      box-shadow:
+        0 0 35px rgba(255, 255, 255, 0.08),
+        inset 0 0 28px rgba(255, 255, 255, 0.025);
       overflow: hidden;
       margin-bottom: 18px;
+      backdrop-filter: blur(8px);
     }
 
     .about {
@@ -75,7 +144,7 @@
       margin: 0;
       color: #d2d2d2;
       font-size: 15px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
     .badges {
@@ -92,6 +161,12 @@
       font-size: 13px;
       color: #ffffff;
       background: rgba(255, 255, 255, 0.06);
+      transition: transform 0.16s ease, background 0.16s ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.14);
     }
 
     .status {
@@ -103,9 +178,15 @@
 
     .status-box {
       border: 1px solid rgba(255, 255, 255, 0.75);
-      border-radius: 14px;
+      border-radius: 15px;
       padding: 12px;
       background: rgba(255, 255, 255, 0.045);
+      transition: transform 0.16s ease, background 0.16s ease;
+    }
+
+    .status-box:hover {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.09);
     }
 
     .status-box b {
@@ -191,7 +272,7 @@
 
     .project {
       border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 15px;
+      border-radius: 16px;
       padding: 16px;
       margin-top: 12px;
       background: rgba(255, 255, 255, 0.045);
@@ -225,17 +306,18 @@
     .gif-card {
       display: block;
       border: 1px solid rgba(255, 255, 255, 0.85);
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       text-decoration: none;
       color: #ffffff;
       background: rgba(255, 255, 255, 0.045);
-      transition: transform 0.18s ease, background 0.18s ease;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
     }
 
     .gif-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.09);
+      box-shadow: 0 0 24px rgba(255, 255, 255, 0.08);
     }
 
     .gif-card:active {
@@ -244,7 +326,7 @@
 
     .gif-card img {
       width: 100%;
-      height: 180px;
+      height: 185px;
       object-fit: cover;
       display: block;
       background: #111111;
@@ -252,18 +334,14 @@
 
     .gif-info {
       padding: 14px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .gif-info strong {
       display: block;
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .gif-info span {
-      color: #c7c7c7;
-      font-size: 13px;
-      line-height: 1.45;
+      font-size: 17px;
+      letter-spacing: 0.4px;
     }
 
     .toast {
@@ -310,7 +388,7 @@
       }
 
       .gif-card img {
-        height: 150px;
+        height: 155px;
       }
 
       .toast {
@@ -323,6 +401,21 @@
 </head>
 
 <body>
+  <div class="particles">
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+  </div>
+
   <main class="page">
     <h1 class="logo">Munur</h1>
     <p class="tagline">Game Developer • Minecraft Map Creator • Unity / C# / Python</p>
@@ -331,9 +424,9 @@
       <h2>About Me</h2>
 
       <p>
-        Hi, I am Munur. I create games, Minecraft maps, gameplay prototypes,
-        and small Minecraft-style animations. I work with Unity, C#, Python,
-        and Blender to build creative projects, maps, and playable game ideas.
+        Hi, I am Munur. I design games, Minecraft maps, gameplay ideas,
+        and small Minecraft-style animations. I use Unity, C#, Python,
+        and Blender to build creative projects, maps, and playable game concepts.
       </p>
 
       <div class="badges">
@@ -433,26 +526,23 @@
 
       <div class="gif-grid">
         <a class="gif-card" href="./gifs/animation1.gif" target="_blank" rel="noopener noreferrer">
-          <img src="./gifs/animation1.gif" alt="Minecraft-style Blender animation 1" />
+          <img src="./gifs/animation1.gif" alt="Animation 1" />
           <div class="gif-info">
             <strong>Animation 1</strong>
-            <span>A short Minecraft-style Blender animation.</span>
           </div>
         </a>
 
         <a class="gif-card" href="./gifs/animation2.gif" target="_blank" rel="noopener noreferrer">
-          <img src="./gifs/animation2.gif" alt="Minecraft-style Blender animation 2" />
+          <img src="./gifs/animation2.gif" alt="Animation 2" />
           <div class="gif-info">
             <strong>Animation 2</strong>
-            <span>A small scene or movement test made in Blender.</span>
           </div>
         </a>
 
         <a class="gif-card" href="./gifs/animation3.gif" target="_blank" rel="noopener noreferrer">
-          <img src="./gifs/animation3.gif" alt="Minecraft-style Blender animation 3" />
+          <img src="./gifs/animation3.gif" alt="Animation 3" />
           <div class="gif-info">
             <strong>Animation 3</strong>
-            <span>A Minecraft-inspired mini animation preview.</span>
           </div>
         </a>
       </div>
