@@ -396,6 +396,23 @@
       background: rgba(255, 255, 255, 0.09);
     }
 
+    .project-thumb {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      border-radius: 13px;
+      margin-bottom: 13px;
+      background: #111;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: transform 0.22s ease, filter 0.22s ease;
+    }
+
+    .project:hover .project-thumb {
+      transform: scale(1.015);
+      filter: brightness(1.08);
+    }
+
     .project strong {
       display: block;
       margin-bottom: 6px;
@@ -524,6 +541,13 @@
       letter-spacing: 0.4px;
     }
 
+    .contact-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
     .toast {
       position: fixed;
       left: 50%;
@@ -568,7 +592,8 @@
         grid-template-columns: 1fr;
       }
 
-      .gif-card img {
+      .gif-card img,
+      .project-thumb {
         height: 155px;
       }
 
@@ -731,6 +756,7 @@
       <h2 class="section-title">Projects</h2>
 
       <div class="project">
+        <img class="project-thumb" src="./gifs/png1.png" alt="Unity Game Project thumbnail" />
         <strong>1. Unity Game Project</strong>
         <span>A gameplay prototype made with Unity and C#.</span>
       </div>
@@ -806,6 +832,19 @@
             <strong>Animation 3</strong>
           </div>
         </a>
+      </div>
+    </section>
+
+    <section class="panel content">
+      <h2 class="section-title">Contact</h2>
+
+      <p class="text">
+        For collaboration, feedback, or project questions, you can contact me on Discord or Gmail.
+      </p>
+
+      <div class="contact-actions">
+        <button class="small-button" type="button" onclick="copyDiscord()">Copy Discord</button>
+        <button class="small-button" type="button" onclick="copyEmail()">Copy Gmail</button>
       </div>
     </section>
 
