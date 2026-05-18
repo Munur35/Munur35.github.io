@@ -29,7 +29,7 @@
 
     .page {
       width: 100%;
-      max-width: 460px;
+      max-width: 480px;
       text-align: center;
     }
 
@@ -93,6 +93,30 @@
       background: rgba(255, 255, 255, 0.06);
     }
 
+    .status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .status-box {
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .status-box b {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .status-box small {
+      color: #bdbdbd;
+    }
+
     .link-card {
       position: relative;
       width: 100%;
@@ -131,25 +155,6 @@
       transform: scale(0.97);
     }
 
-    .link-card::after {
-      content: "";
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      background: rgba(255, 255, 255, 0.32);
-      border-radius: 50%;
-      transform: scale(0);
-      opacity: 0;
-      right: 24px;
-      top: 50%;
-      transition: transform 0.28s ease, opacity 0.28s ease;
-    }
-
-    .link-card:active::after {
-      transform: scale(9);
-      opacity: 1;
-    }
-
     .link-main {
       display: flex;
       flex-direction: column;
@@ -177,7 +182,8 @@
       flex-shrink: 0;
     }
 
-    .projects {
+    .projects,
+    .animations {
       padding: 22px;
       text-align: left;
     }
@@ -208,28 +214,55 @@
       line-height: 1.5;
     }
 
-    .status {
+    .gif-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 18px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 14px;
     }
 
-    .status-box {
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      border-radius: 14px;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.045);
-    }
-
-    .status-box b {
+    .gif-card {
       display: block;
-      font-size: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.045);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .gif-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .gif-card:active {
+      transform: scale(0.98);
+    }
+
+    .gif-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      background: #111;
+    }
+
+    .gif-info {
+      padding: 14px;
+    }
+
+    .gif-info strong {
+      display: block;
+      font-size: 16px;
       margin-bottom: 4px;
     }
 
-    .status-box small {
-      color: #bdbdbd;
+    .gif-info span {
+      color: #c7c7c7;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     .toast {
@@ -247,6 +280,7 @@
       pointer-events: none;
       transition: 0.22s ease;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      z-index: 10;
     }
 
     .toast.show {
@@ -272,6 +306,10 @@
       .status {
         grid-template-columns: 1fr;
       }
+
+      .gif-card img {
+        height: 150px;
+      }
     }
   </style>
 </head>
@@ -285,23 +323,24 @@
       <h2>About Me</h2>
       <p>
         Hi, I am Munur. I create games, Minecraft maps, gameplay prototypes,
-        and small tools. I work with Unity, C#, and Python, and I enjoy building
-        creative systems, maps, and playable game ideas.
+        and small Minecraft-style animations. I work with Unity, C#, Python,
+        and Blender to build creative projects, maps, and playable game ideas.
       </p>
 
       <div class="badges">
         <span class="badge">Unity</span>
         <span class="badge">C#</span>
         <span class="badge">Python</span>
+        <span class="badge">Blender</span>
         <span class="badge">Minecraft Maps</span>
+        <span class="badge">Mini Animations</span>
         <span class="badge">Game Design</span>
-        <span class="badge">Level Design</span>
       </div>
 
       <div class="status">
         <div class="status-box">
           <b>Current Focus</b>
-          <small>Game prototypes</small>
+          <small>Games, maps & animations</small>
         </div>
         <div class="status-box">
           <b>Style</b>
@@ -326,6 +365,22 @@
         </span>
         <span class="arrow">⧉</span>
       </button>
+
+      <a class="link-card" href="mailto:munurcuk35@gmail.com">
+        <span class="link-main">
+          <span class="link-title">Gmail</span>
+          <span class="link-desc">munurcuk35@gmail.com</span>
+        </span>
+        <span class="arrow">✉</span>
+      </a>
+
+      <a class="link-card" href="#animations">
+        <span class="link-main">
+          <span class="link-title">Blender Animations</span>
+          <span class="link-desc">Minecraft-style mini animations</span>
+        </span>
+        <span class="arrow">↓</span>
+      </a>
 
       <a class="link-card" href="https://www.youtube.com/@Munur35" target="_blank" rel="noopener noreferrer">
         <span class="link-main">
@@ -358,8 +413,38 @@
       </div>
 
       <div class="project">
-        <strong>3. Python Tool / Experiment</strong>
-        <span>A small tool, experiment, or helper project made with Python.</span>
+        <strong>3. Blender Minecraft Animations</strong>
+        <span>Small Minecraft-style animations made with Blender.</span>
+      </div>
+    </section>
+
+    <section class="panel animations" id="animations">
+      <h2 class="section-title">Blender Minecraft Animations</h2>
+
+      <div class="gif-grid">
+        <a class="gif-card" href="gifs/animation1.gif" target="_blank">
+          <img src="gifs/animation1.gif" alt="Minecraft style animation 1">
+          <div class="gif-info">
+            <strong>Animation 1</strong>
+            <span>A short Minecraft-style Blender animation.</span>
+          </div>
+        </a>
+
+        <a class="gif-card" href="gifs/animation2.gif" target="_blank">
+          <img src="gifs/animation2.gif" alt="Minecraft style animation 2">
+          <div class="gif-info">
+            <strong>Animation 2</strong>
+            <span>A small scene or movement test made in Blender.</span>
+          </div>
+        </a>
+
+        <a class="gif-card" href="gifs/animation3.gif" target="_blank">
+          <img src="gifs/animation3.gif" alt="Minecraft style animation 3">
+          <div class="gif-info">
+            <strong>Animation 3</strong>
+            <span>A Minecraft-inspired mini animation preview.</span>
+          </div>
+        </a>
       </div>
     </section>
 
