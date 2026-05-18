@@ -10,148 +10,267 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top, #1c1c1c 0%, #080808 45%, #000 100%);
+        radial-gradient(circle at top, rgba(80, 80, 80, 0.25), transparent 35%),
+        linear-gradient(180deg, #090909 0%, #000 100%);
       color: #f5f5f5;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 30px 16px;
+      padding: 28px 16px;
     }
 
     .page {
       width: 100%;
-      max-width: 430px;
+      max-width: 460px;
       text-align: center;
     }
 
     .logo {
+      margin: 12px 0 6px;
       font-size: 56px;
       font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 8px;
+      letter-spacing: 3px;
       color: #fff;
-      text-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
     }
 
-    .subtitle {
+    .tagline {
+      margin: 0 0 22px;
       color: #bdbdbd;
-      margin-bottom: 28px;
       font-size: 15px;
     }
 
-    .card {
+    .panel {
+      width: 100%;
       border: 2px solid #f5f5f5;
-      border-radius: 18px;
-      overflow: hidden;
-      background: rgba(10, 10, 10, 0.78);
+      border-radius: 22px;
+      background: rgba(10, 10, 10, 0.88);
       box-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
-      transform: rotate(-1deg);
+      overflow: hidden;
+      margin-bottom: 18px;
     }
 
-    .link-button {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 24px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 24px;
-      font-weight: 800;
-      border-bottom: 2px solid #f5f5f5;
-      transition: 0.2s ease;
-    }
-
-    .link-button:hover {
-      background: #f5f5f5;
-      color: #000;
-      padding-left: 34px;
-    }
-
-    .link-button span {
-      font-size: 18px;
-    }
-
-    .section {
-      padding: 22px;
+    .about {
+      padding: 24px;
       text-align: left;
-      border-bottom: 2px solid #f5f5f5;
     }
 
-    .section h2 {
+    .about h2,
+    .section-title {
       margin: 0 0 12px;
-      font-size: 20px;
+      font-size: 22px;
+      letter-spacing: 0.5px;
     }
 
-    .section p {
-      color: #cfcfcf;
-      line-height: 1.6;
+    .about p {
       margin: 0;
+      color: #d2d2d2;
       font-size: 15px;
+      line-height: 1.65;
     }
 
-    .skills {
+    .badges {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 14px;
+      margin-top: 18px;
     }
 
-    .skill {
+    .badge {
       border: 1px solid #fff;
       border-radius: 999px;
       padding: 7px 12px;
       font-size: 13px;
       color: #fff;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .link-card {
+      position: relative;
+      width: 100%;
+      border: 0;
+      border-bottom: 2px solid #f5f5f5;
+      background: transparent;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 21px 24px;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      overflow: hidden;
+      transition:
+        transform 0.16s ease,
+        background 0.16s ease,
+        color 0.16s ease,
+        padding-left 0.16s ease;
+    }
+
+    .link-card:last-child {
+      border-bottom: 0;
+    }
+
+    .link-card:hover {
+      background: #f5f5f5;
+      color: #000;
+      padding-left: 31px;
+    }
+
+    .link-card:active {
+      transform: scale(0.97);
+    }
+
+    .link-card::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.32);
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0;
+      right: 24px;
+      top: 50%;
+      transition: transform 0.28s ease, opacity 0.28s ease;
+    }
+
+    .link-card:active::after {
+      transform: scale(9);
+      opacity: 1;
+    }
+
+    .link-main {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .link-title {
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .link-desc {
+      font-size: 13px;
+      color: #bdbdbd;
+      transition: color 0.16s ease;
+    }
+
+    .link-card:hover .link-desc {
+      color: #222;
+    }
+
+    .arrow {
+      font-size: 20px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .projects {
+      padding: 22px;
+      text-align: left;
     }
 
     .project {
-      display: block;
-      padding: 17px 22px;
-      color: #fff;
-      text-decoration: none;
-      text-align: left;
-      border-bottom: 2px solid #f5f5f5;
-      transition: 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      padding: 16px;
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.045);
+      transition: transform 0.16s ease, background 0.16s ease;
     }
 
     .project:hover {
-      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.09);
     }
 
     .project strong {
       display: block;
-      font-size: 18px;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      font-size: 17px;
     }
 
-    .project small {
+    .project span {
+      color: #c7c7c7;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .status-box {
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .status-box b {
+      display: block;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .status-box small {
       color: #bdbdbd;
     }
 
-    .footer {
-      padding: 16px;
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      background: #f5f5f5;
+      color: #000;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.22s ease;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      color: #8e8e8e;
       font-size: 13px;
-      color: #aaa;
+      padding: 8px 0 18px;
     }
 
     @media (max-width: 480px) {
       .logo {
-        font-size: 44px;
+        font-size: 46px;
       }
 
-      .link-button {
-        font-size: 21px;
-        padding: 19px 20px;
+      .link-title {
+        font-size: 20px;
       }
 
-      .card {
-        transform: rotate(0deg);
+      .status {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -160,58 +279,122 @@
 <body>
   <main class="page">
     <h1 class="logo">Munur</h1>
-    <p class="subtitle">Game Developer • Minecraft Map Creator • Unity Developer</p>
+    <p class="tagline">Game Developer • Minecraft Map Creator • Unity / C# / Python</p>
 
-    <div class="card">
-      <a class="link-button" href="#" target="_blank">
-        itch.io <span>→</span>
-      </a>
+    <section class="panel about">
+      <h2>About Me</h2>
+      <p>
+        Hi, I am Munur. I create games, Minecraft maps, gameplay prototypes,
+        and small tools. I work with Unity, C#, and Python, and I enjoy building
+        creative systems, maps, and playable game ideas.
+      </p>
 
-      <a class="link-button" href="#" target="_blank">
-        Discord <span>→</span>
-      </a>
-
-      <a class="link-button" href="#" target="_blank">
-        YouTube <span>→</span>
-      </a>
-
-      <section class="section">
-        <h2>About Me</h2>
-        <p>
-          Hi, I am Munur. I develop games, create Minecraft maps, and build
-          gameplay systems using Unity, C#, and Python. I enjoy making playable
-          prototypes, custom maps, and creative game experiences.
-        </p>
-
-        <div class="skills">
-          <span class="skill">Unity</span>
-          <span class="skill">C#</span>
-          <span class="skill">Python</span>
-          <span class="skill">Minecraft Maps</span>
-          <span class="skill">Game Design</span>
-          <span class="skill">Level Design</span>
-        </div>
-      </section>
-
-      <a class="project" href="#" target="_blank">
-        <strong>1. Unity Game Project</strong>
-        <small>A small gameplay prototype built with Unity and C#.</small>
-      </a>
-
-      <a class="project" href="#" target="_blank">
-        <strong>2. Minecraft Map Project</strong>
-        <small>A custom Minecraft map focused on exploration and fun challenges.</small>
-      </a>
-
-      <a class="project" href="#" target="_blank">
-        <strong>3. Python Tool / Experiment</strong>
-        <small>A small tool or experiment made with Python.</small>
-      </a>
-
-      <div class="footer">
-        © 2026 Munur — Personal Portfolio
+      <div class="badges">
+        <span class="badge">Unity</span>
+        <span class="badge">C#</span>
+        <span class="badge">Python</span>
+        <span class="badge">Minecraft Maps</span>
+        <span class="badge">Game Design</span>
+        <span class="badge">Level Design</span>
       </div>
-    </div>
+
+      <div class="status">
+        <div class="status-box">
+          <b>Current Focus</b>
+          <small>Game prototypes</small>
+        </div>
+        <div class="status-box">
+          <b>Style</b>
+          <small>Creative & playable</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <a class="link-card" href="https://munur35.itch.io/" target="_blank" rel="noopener noreferrer">
+        <span class="link-main">
+          <span class="link-title">itch.io</span>
+          <span class="link-desc">My games and prototypes</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <button class="link-card" onclick="copyDiscord()">
+        <span class="link-main">
+          <span class="link-title">Discord</span>
+          <span class="link-desc">Copy username: _munur_</span>
+        </span>
+        <span class="arrow">⧉</span>
+      </button>
+
+      <a class="link-card" href="https://www.youtube.com/@Munur35" target="_blank" rel="noopener noreferrer">
+        <span class="link-main">
+          <span class="link-title">YouTube — Mods</span>
+          <span class="link-desc">Minecraft mod sharing channel</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="link-card" href="https://www.youtube.com/@Munur35_Game" target="_blank" rel="noopener noreferrer">
+        <span class="link-main">
+          <span class="link-title">YouTube — Games</span>
+          <span class="link-desc">Game projects and development videos</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+    </section>
+
+    <section class="panel projects">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="project">
+        <strong>1. Unity Game Project</strong>
+        <span>A gameplay prototype made with Unity and C#.</span>
+      </div>
+
+      <div class="project">
+        <strong>2. Minecraft Map Project</strong>
+        <span>A custom map focused on exploration, challenges, and fun gameplay.</span>
+      </div>
+
+      <div class="project">
+        <strong>3. Python Tool / Experiment</strong>
+        <span>A small tool, experiment, or helper project made with Python.</span>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Munur — Personal Portfolio
+    </footer>
   </main>
+
+  <div class="toast" id="toast">Discord username copied: _munur_</div>
+
+  <script>
+    function showToast() {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1800);
+    }
+
+    function copyDiscord() {
+      const username = "_munur_";
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(username).then(showToast);
+      } else {
+        const tempInput = document.createElement("input");
+        tempInput.value = username;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+        showToast();
+      }
+    }
+  </script>
 </body>
 </html>
