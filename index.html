@@ -104,9 +104,21 @@
       font-weight: 900;
       letter-spacing: 3px;
       color: #ffffff;
-      text-shadow:
-        0 0 16px rgba(255, 255, 255, 0.28),
-        0 0 40px rgba(255, 255, 255, 0.12);
+      animation: softGlow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes softGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 16px rgba(255, 255, 255, 0.26),
+          0 0 40px rgba(255, 255, 255, 0.10);
+      }
+
+      50% {
+        text-shadow:
+          0 0 22px rgba(255, 255, 255, 0.36),
+          0 0 52px rgba(255, 255, 255, 0.16);
+      }
     }
 
     .tagline {
@@ -126,6 +138,14 @@
       overflow: hidden;
       margin-bottom: 18px;
       backdrop-filter: blur(8px);
+      transition: box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .panel:hover {
+      border-color: rgba(255, 255, 255, 0.95);
+      box-shadow:
+        0 0 42px rgba(255, 255, 255, 0.11),
+        inset 0 0 28px rgba(255, 255, 255, 0.03);
     }
 
     .content {
@@ -161,6 +181,7 @@
       color: #ffffff;
       background: rgba(255, 255, 255, 0.06);
       transition: transform 0.16s ease, background 0.16s ease;
+      cursor: default;
     }
 
     .badge:hover {
@@ -176,6 +197,8 @@
     }
 
     .status-box {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.75);
       border-radius: 15px;
       padding: 12px;
@@ -199,6 +222,8 @@
     }
 
     .featured-card {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 18px;
       padding: 18px;
@@ -286,6 +311,25 @@
         padding-left 0.16s ease;
     }
 
+    .link-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.22),
+        transparent
+      );
+      transform: translateX(-120%);
+      transition: transform 0.45s ease;
+      pointer-events: none;
+    }
+
+    .link-card:hover::before {
+      transform: translateX(120%);
+    }
+
     .link-card:last-child {
       border-bottom: 0;
     }
@@ -304,6 +348,8 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      position: relative;
+      z-index: 1;
     }
 
     .link-title {
@@ -325,9 +371,18 @@
       font-size: 20px;
       font-weight: bold;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.16s ease;
+    }
+
+    .link-card:hover .arrow {
+      transform: translateX(4px);
     }
 
     .project {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 16px;
       padding: 16px;
@@ -361,6 +416,8 @@
     }
 
     .tool {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.75);
       border-radius: 15px;
       padding: 13px;
@@ -384,6 +441,32 @@
       font-size: 12px;
     }
 
+    .featured-card::after,
+    .project::after,
+    .tool::after,
+    .gif-card::after,
+    .status-box::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top left,
+        rgba(255, 255, 255, 0.12),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      pointer-events: none;
+    }
+
+    .featured-card:hover::after,
+    .project:hover::after,
+    .tool:hover::after,
+    .gif-card:hover::after,
+    .status-box:hover::after {
+      opacity: 1;
+    }
+
     .gif-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -392,10 +475,11 @@
     }
 
     .gif-card {
+      position: relative;
+      overflow: hidden;
       display: block;
       border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 18px;
-      overflow: hidden;
       text-decoration: none;
       color: #ffffff;
       background: rgba(255, 255, 255, 0.045);
@@ -418,12 +502,20 @@
       object-fit: cover;
       display: block;
       background: #111111;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .gif-card:hover img {
+      transform: scale(1.025);
+      filter: brightness(1.08);
     }
 
     .gif-info {
       padding: 14px;
       text-align: center;
       border-top: 1px solid rgba(255, 255, 255, 0.25);
+      position: relative;
+      z-index: 1;
     }
 
     .gif-info strong {
