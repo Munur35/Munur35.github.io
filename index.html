@@ -400,18 +400,18 @@
 
     .project-thumb {
       width: 100%;
-      height: 170px;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       display: block;
       border-radius: 13px;
       margin-bottom: 13px;
-      background: #111;
+      background: #111111;
       border: 1px solid rgba(255, 255, 255, 0.25);
       transition: transform 0.22s ease, filter 0.22s ease;
     }
 
     .project:hover .project-thumb {
-      transform: scale(1.015);
+      transform: scale(1.01);
       filter: brightness(1.08);
     }
 
@@ -594,9 +594,12 @@
         grid-template-columns: 1fr;
       }
 
-      .gif-card img,
-      .project-thumb {
+      .gif-card img {
         height: 155px;
+      }
+
+      .project-thumb {
+        height: auto;
       }
 
       .toast {
