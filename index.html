@@ -279,6 +279,8 @@
       font-weight: 800;
       background: rgba(255, 255, 255, 0.05);
       transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
+      cursor: pointer;
+      font-family: inherit;
     }
 
     .small-button:hover {
@@ -756,7 +758,7 @@
       <h2 class="section-title">Projects</h2>
 
       <div class="project">
-        <img class="project-thumb" src="./gifs/png1.png" alt="Unity Game Project thumbnail" />
+        <img id="gameThumbnail" class="project-thumb" alt="Unity Game Project thumbnail" />
         <strong>1. Unity Game Project</strong>
         <span>A gameplay prototype made with Unity and C#.</span>
       </div>
@@ -812,22 +814,22 @@
       <h2 class="section-title">Minecraft-style GIFs</h2>
 
       <div class="gif-grid">
-        <a class="gif-card" href="./gifs/animation1.gif" target="_blank" rel="noopener noreferrer">
-          <img src="./gifs/animation1.gif" alt="Animation 1" />
+        <a class="gif-card random-gif-card" target="_blank" rel="noopener noreferrer">
+          <img alt="Random Minecraft-style GIF 1" />
           <div class="gif-info">
             <strong>Animation 1</strong>
           </div>
         </a>
 
-        <a class="gif-card" href="./gifs/animation2.gif" target="_blank" rel="noopener noreferrer">
-          <img src="./gifs/animation2.gif" alt="Animation 2" />
+        <a class="gif-card random-gif-card" target="_blank" rel="noopener noreferrer">
+          <img alt="Random Minecraft-style GIF 2" />
           <div class="gif-info">
             <strong>Animation 2</strong>
           </div>
         </a>
 
-        <a class="gif-card" href="./gifs/animation3.gif" target="_blank" rel="noopener noreferrer">
-          <img src="./gifs/animation3.gif" alt="Animation 3" />
+        <a class="gif-card random-gif-card" target="_blank" rel="noopener noreferrer">
+          <img alt="Random Minecraft-style GIF 3" />
           <div class="gif-info">
             <strong>Animation 3</strong>
           </div>
@@ -856,6 +858,9 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    const MAX_GIFS_TO_CHECK = 100;
+    const MAX_GAME_IMAGES_TO_CHECK = 50;
+
     function showToast(message) {
       const toast = document.getElementById("toast");
       toast.textContent = message;
@@ -889,6 +894,106 @@
     function copyEmail() {
       copyText("munurcuk35@gmail.com", "Gmail copied: munurcuk35@gmail.com");
     }
+
+    function imageExists(src) {
+      return new Promise(function (resolve) {
+        const image = new Image();
+
+        image.onload = function () {
+          resolve(true);
+        };
+
+        image.onerror = function () {
+          resolve(false);
+        };
+
+        image.src = src + "?check=" + Date.now();
+      });
+    }
+
+    async function findExistingFiles(prefix, extension, maxCount) {
+      const files = [];
+      const checks = [];
+
+      for (let i = 1; i <= maxCount; i++) {
+        const path = "./gifs/" + prefix + i + "." + extension;
+
+        checks.push(
+          imageExists(path).then(function (exists) {
+            if (exists) {
+              files.push(path);
+            }
+          })
+        );
+      }
+
+      await Promise.all(checks);
+
+      return files.sort(function (a, b) {
+        const numberA = Number(a.match(/\d+/)[0]);
+        const numberB = Number(b.match(/\d+/)[0]);
+        return numberA - numberB;
+      });
+    }
+
+    function shuffleArray(array) {
+      return array
+        .map(function (value) {
+          return {
+            value: value,
+            random: Math.random()
+          };
+        })
+        .sort(function (a, b) {
+          return a.random - b.random;
+        })
+        .map(function (item) {
+          return item.value;
+        });
+    }
+
+    async function loadRandomGifs() {
+      const gifFiles = await findExistingFiles("animation", "gif", MAX_GIFS_TO_CHECK);
+      const selectedGifs = shuffleArray(gifFiles).slice(0, 3);
+      const gifCards = document.querySelectorAll(".random-gif-card");
+
+      gifCards.forEach(function (card, index) {
+        const image = card.querySelector("img");
+        const title = card.querySelector("strong");
+        const selectedGif = selectedGifs[index];
+
+        if (!selectedGif) {
+          card.style.display = "none";
+          return;
+        }
+
+        card.href = selectedGif;
+        image.src = selectedGif;
+        title.textContent = "Animation " + (index + 1);
+      });
+    }
+
+    async function loadRandomGameThumbnail() {
+      const pngFiles = await findExistingFiles("png", "png", MAX_GAME_IMAGES_TO_CHECK);
+      const thumbnail = document.getElementById("gameThumbnail");
+
+      if (!thumbnail) {
+        return;
+      }
+
+      if (pngFiles.length === 0) {
+        thumbnail.style.display = "none";
+        return;
+      }
+
+      const randomImage = pngFiles[Math.floor(Math.random() * pngFiles.length)];
+      thumbnail.src = randomImage;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      loadRandomGifs();
+      loadRandomGameThumbnail();
+    });
   </script>
 </body>
 </html>
